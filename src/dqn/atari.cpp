@@ -1,4 +1,6 @@
 #include <dqn/atari.h>
+#include <python/ale_python_interface.hpp>
+using namespace ale;
 
 namespace dqn {
 

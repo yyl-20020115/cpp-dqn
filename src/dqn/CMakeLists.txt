@@ -23,11 +23,16 @@ if (USE_SDL)
 endif()
 
 # ALE
-target_link_libraries(dqn PUBLIC ${PROJECT_SOURCE_DIR}/third_party/Arcade-Learning-Environment-master/libale.so)
+#target_link_libraries(dqn PUBLIC ${PROJECT_SOURCE_DIR}/third_party/Arcade-Learning-Environment-master/libale.so)
+target_link_libraries(dqn PUBLIC ${PROJECT_SOURCE_DIR}/third_party/Arcade-Learning-Environment-master/build/src/Debug/ale.lib)
 
 # NNabla
-find_library(NNABLA_LIBRARY nnabla HINTS /usr/local/lib)
-find_library(NNABLA_UTILS_LIBRARY nnabla_utils HINTS /usr/local/lib)
+target_include_directories(dqn PUBLIC ${NNABLA_INCLUDE_DIRS} ${pybind11_INCLUDE_DIRS})
+message(STATUS "Pybind11 include dirs: ${pybind11_INCLUDE_DIRS}")
+message(STATUS "NNabla library: ${NNABLA_LIBRARY}")
+message(STATUS "NNabla utils library: ${NNABLA_UTILS_LIBRARY}")
+message(STATUS "NNabla include dirs: ${NNABLA_INCLUDE_DIRS}")
+
 target_link_libraries(dqn PUBLIC ${NNABLA_LIBRARY} ${NNABLA_UTILS_LIBRARY})
 
 # NNabla CUDA extension

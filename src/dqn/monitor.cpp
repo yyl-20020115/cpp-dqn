@@ -1,4 +1,5 @@
 #include <dqn/monitor.h>
+#include <direct.h>
 
 namespace dqn {
 
@@ -37,10 +38,17 @@ void Monitor::print(const string &name, int t, const vector<float> &values) {
 void Monitor::prepare_directory() {
   string base_path = LOG_BASE_DIR;
   string path = base_path + "/" + logdir_;
+  #ifdef _WIN32
+  if (mkdir(path.c_str())) {
+    fprintf(stderr, "failed to create directory at %s\n", path.c_str());
+    exit(1);
+  }
+#else
   if (mkdir(path.c_str(), 0755)) {
     fprintf(stderr, "failed to create directory at %s\n", path.c_str());
     exit(1);
   }
+  #endif
 }
 
 void Monitor::save_parameters(int t, shared_ptr<Controller> controller) {

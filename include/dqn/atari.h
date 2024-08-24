@@ -8,7 +8,7 @@
 #include <random>
 
 using namespace std;
-
+using namespace ale;
 #define RAW_IMAGE_WIDTH 160
 #define RAW_IMAGE_HEIGHT 210
 #define RAW_IMAGE_SIZE 210 * 160
